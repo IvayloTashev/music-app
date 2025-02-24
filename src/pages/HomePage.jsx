@@ -1,10 +1,12 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import MusicList from '../components/MusicList'
 
 const HomePage = () => {
     return (
-        <div>
+        <div className='bg-slate-700 h-screen'>
             <Navbar />
+            <MusicList />
             HomePage
         </div>
     )
