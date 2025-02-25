@@ -1,9 +1,13 @@
 import React from 'react'
 import { genres } from '../assets/constants'
 import Card from './Card';
+import { useGetInfosQuery } from '../redux/apiCalls'
 
 const MusicList = () => {
+    const { data, isFetching, error } = useGetInfosQuery();
 
+    console.log(data);
+    
     const dummyData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
