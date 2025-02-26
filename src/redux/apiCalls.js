@@ -10,12 +10,12 @@ export const deezerApi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        getInfos: builder.query({
-            query: () => '/search?q=rock'
+        getSearch: builder.query({
+            query: (queryString) => `/search?q=${queryString}`
         }),
     })
 });
 
 export const {
-    useGetInfosQuery,
+    useGetSearchQuery,
 } = deezerApi;
