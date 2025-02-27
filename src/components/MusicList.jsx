@@ -25,11 +25,11 @@ const MusicList = () => {
             <div className='flex flex-wrap gap-4 justify-center'>
                 {data?.data?.map((item) => (
                     <>
-                        <Link to={`/details/${item.id}`} className='h-60 py-2 basis-1/6 bg-slate-700 rounded-md' key={item.id}>
-                            <div className='flex flex-col gap-1.5 justify-center items-center'>
-                                <h3 className='font-bold text-center truncate w-65'>{item.album.title}</h3>
-                                <img src={item?.album.cover_big} alt="cover" className='object-cover h-40 rounded-xl' />
-                                <h3 className='text-center truncate w-50'>{item.title}</h3>
+                        <Link to={`/details/${item.id}`} className='h-90 py-3 px-2 basis-1/6 bg-slate-700' key={item.id}>
+                            <div className='flex flex-col gap-1 justify-center items-center'>
+                                <img src={item?.album.cover_big} alt="cover" className='object-cover w-70 rounded-xl hover:opacity-30' />
+                                <h3 className='font-bold truncate w-65'>{item.title}</h3>
+                                <h4 className='truncate w-65'>{item.artist.name}</h4>
                             </div>
                         </Link>
                     </>
