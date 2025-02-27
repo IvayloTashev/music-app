@@ -13,9 +13,13 @@ export const deezerApi = createApi({
         getSearch: builder.query({
             query: (queryString) => `/search?q=${queryString}`
         }),
+        getTrack: builder.query({
+            query: (trackID) => `/track/${trackID}`
+        }),
     })
 });
 
 export const {
     useGetSearchQuery,
+    useGetTrackQuery,
 } = deezerApi;

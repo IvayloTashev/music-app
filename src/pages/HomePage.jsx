@@ -4,10 +4,9 @@ import MusicList from '../components/MusicList'
 
 const HomePage = () => {
     return (
-        <div className='bg-slate-700 h-screen'>
+        <div>
             <Navbar />
             <MusicList />
-            HomePage
         </div>
     )
 }
