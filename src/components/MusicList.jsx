@@ -8,34 +8,41 @@ const MusicList = () => {
     const { data, isFetching, error } = useGetSearchQuery(search);
 
     return (
-        <div className='flex flex-col gap-2 bg-slate-800 text-white h-screen'>
-            <div className='flex flex-col items-center gap-5 px-10 py-5'>
-                <h1 className='text-3xl font-bold'>Discover</h1>
-                {/* <select className='border-1 rounded-md text-lg p-2 font-medium' name="genges" id="genges">
-                    {genres.map((item) => (
-                        <option className='bg-slate-800' value={item.value} key={item.value}>{item.title}</option>
-                    ))}
-                </select> */}
-                <div className='flex items-center border-1 border-red-400 rounded-xl p-1'>
-                    <SearchIcon className=''/>
-                    <input className='rounded-sm p-1 focus:outline-0 text-red-400' type="text" name='search' onChange={(e) => setSearch(e.target.value)} />
+        <section className="flex flex-col gap-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white py-12 px-6 shadow-lg h-620">
+            <div className="flex flex-col items-center gap-6">
+                <h1 className="text-4xl font-extrabold tracking-wide">Discover</h1>
+                <div className="flex items-center gap-2 border border-red-400 rounded-full px-4 py-2 bg-slate-700 shadow-md transition-all duration-300 focus-within:ring-2 focus-within:ring-red-400">
+                    <SearchIcon className="text-red-400" />
+                    <input
+                        type="text"
+                        name="search"
+                        className="bg-transparent outline-none text-red-300 placeholder-red-500 w-60"
+                        placeholder="Search music..."
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
                 </div>
             </div>
 
-            <div className='flex flex-wrap gap-4 justify-center'>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-center py-6">
                 {data?.data?.map((item) => (
-                    <>
-                        <Link to={`/details/${item.id}`} className='h-90 py-3 px-2 basis-1/6 bg-slate-700' key={item.id}>
-                            <div className='flex flex-col gap-1 justify-center items-center'>
-                                <img src={item?.album.cover_big} alt="cover" className='object-cover w-70 rounded-xl hover:opacity-30' />
-                                <h3 className='font-bold truncate w-65'>{item.title}</h3>
-                                <h4 className='truncate w-65'>{item.artist.name}</h4>
-                            </div>
-                        </Link>
-                    </>
+                    <Link
+                        to={`/details/${item.id}`}
+                        className="relative bg-slate-700 rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                        key={item.id}
+                    >
+                        <img
+                            src={item?.album.cover_big}
+                            alt="cover"
+                            className="object-cover w-full rounded-t-xl transition-opacity duration-300 hover:opacity-60"
+                        />
+                        <div className="p-3 flex flex-col items-center text-center">
+                            <h3 className="font-bold truncate w-full">{item.title}</h3>
+                            <h4 className="text-sm text-gray-300 truncate w-full">{item.artist.name}</h4>
+                        </div>
+                    </Link>
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
 
