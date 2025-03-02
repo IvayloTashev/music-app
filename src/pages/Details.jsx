@@ -2,36 +2,59 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import { useGetTrackQuery } from '../redux/apiCalls'
 import { useParams } from 'react-router'
+import MusicPlayer from '../components/MusicPlayer'
 
 const details = () => {
     const { id } = useParams();
     const { data, isFetching, error } = useGetTrackQuery(id)
 
-    console.log(data);
+    if (isFetching) {
+        return (
+            <div className="flex items-center justify-center h-screen text-white">
+                <p>Loading...</p>
+            </div>
+        );
+    }
 
+    if (error) {
+        return (
+            <div className="flex items-center justify-center h-screen text-white">
+                <p>Something went wrong. Try again later.</p>
+            </div>
+        );
+    }
 
     return (
-        <div className='bg-slate-700 h-screen'>
+        <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
             <Navbar />
-            <h2 className='text-3xl text-white font-bold mb-10 text-center mt-5'>Detailed information</h2>
-            <div className='text-white flex flex-wrap justify-center items-center my-20 mx-40 py-5 px-10 bg-slate-800 rounded-2xl'>
-                <div className='flex-1 h-full flex flex-col gap-1'>
-                    <p>Song: {data?.title}</p>
-                    <p>Band/Singer: {data?.artist.name}</p>
-                    <p>Album: {data?.album.title}</p>
-                    <p>Released: {data?.album.release_date}</p>
-                    <div className='mt-5'>
-                        Track sample
+            <div className="flex justify-center items-center flex-col container mx-auto px-6 py-10">
+                <h2 className="text-4xl font-extrabold text-center mb-10 tracking-wide">
+                    Track Details
+                </h2>
+
+                <div className="flex flex-col lg:flex-row items-center gap-12 bg-slate-800 p-8 rounded-2xl shadow-lg w-[1250px]">
+                    <div className="flex-shrink-0">
+                        <img
+                            src={data?.album.cover_big}
+                            alt="cover_img"
+                            className="w-80 h-80 rounded-xl shadow-md transform transition-transform duration-300 hover:scale-105"
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-4 text-lg w-full">
+                        <p><span className="font-semibold text-red-400">Song:</span> {data?.title}</p>
+                        <p><span className="font-semibold text-red-400">Artist:</span> {data?.artist.name}</p>
+                        <p><span className="font-semibold text-red-400">Album:</span> {data?.album.title}</p>
+                        <p><span className="font-semibold text-red-400">Released:</span> {data?.album.release_date}</p>
+
+                        <div>
+                            <MusicPlayer previewUrl={data?.preview} />
+                        </div>
                     </div>
                 </div>
-
-                <div className='flex-1 flex justify-center items-center'>
-                    <img src={data?.album.cover_big} alt="cover_img" className='h-90 w-90 rounded-bl-4xl rounded-tr-4xl' />
-                </div>
             </div>
-
         </div>
-    )
+    );
 }
 
 export default details
